@@ -1,0 +1,32 @@
+{
+  "siteName": "什麼都想學億點",
+  "siteTagline": "將好想法留在這裡，下一次更快找到答案。",
+  "categories": [
+    {
+      "id": "學習與整理",
+      "description": "方法、筆記、學習策略"
+    },
+    {
+      "id": "AI與工具",
+      "description": "AI 應用與工具使用"
+    },
+    {
+      "id": "程式與網頁",
+      "description": "開發知識與網頁技術"
+    },
+    {
+      "id": "設計與效率",
+      "description": "設計原則與工作流程"
+    }
+  ],
+  "files": [
+    "content/如何整理一篇值得保留的筆記.json",
+    "content/如何寫出可重複使用的 AI 提示詞.json",
+    "content/間隔複習入門.json",
+    "content/Git 與 GitHub 的差別.json",
+    "content/讓網頁一眼看懂的資訊層級.json",
+    "content/一個簡單有效的每週回顧流程.json",
+    "content/MDN Web Docs 前端學習資源.json",
+    "content/GitHub Pages 官方說明.json"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "mdn-resource",
+  "title": "MDN Web Docs 前端學習資源",
+  "category": "程式與網頁",
+  "tags": [
+    "網頁設計",
+    "學習資源"
+  ],
+  "summary": "前端技術的參考入口，適合查閱 HTML、CSS 與 JavaScript 的概念與用法。",
+  "kind": "link",
+  "url": "https://developer.mozilla.org/zh-TW/docs/Learn_web_development",
+  "updated": "2026-11-16",
+  "reading_minutes": 0,
+  "sections": []
+}

@@ -1,0 +1,15 @@
+{
+  "id": "github-pages-resource",
+  "title": "GitHub Pages 官方說明",
+  "category": "程式與網頁",
+  "tags": [
+    "Git",
+    "部署"
+  ],
+  "summary": "了解如何將 GitHub Repository 中的靜態網站發布成可以公開瀏覽的頁面。",
+  "kind": "link",
+  "url": "https://docs.github.com/en/pages",
+  "updated": "2026-11-16",
+  "reading_minutes": 0,
+  "sections": []
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="什麼都想學億點：可分類、搜尋與持續擴充的個人知識庫。">
+  <meta name="theme-color" content="#eef5ef">
+  <title>什麼都想學億點｜讓知識有跡可循</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <script type="module" src="./assets/js/main.js"></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="什麼都想學億點首頁">
+        <span class="brand-mark" aria-hidden="true">✳</span>
+        <span>什麼都想學億點</span>
+      </a>
+      <nav class="header-links" aria-label="主要導覽">
+        <a href="#collection">探索知識</a>
+        <a href="#about">關於本站</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> A SMALL LIBRARY OF IDEAS</p>
+          <h1 id="hero-title">什麼都想學億點<span class="hero-subtitle">每天學一點，把好奇變成自己的知識。</span></h1>
+          <p class="hero-description">收集值得保留的文章、方法與網站。用清楚的分類與標籤，把零散的資訊整理成隨時可用的個人知識庫。</p>
+          <a class="hero-link" href="#collection">開始探索 <span aria-hidden="true">↘</span></a>
+        </div>
+      </section>
+
+      <section id="collection" class="collection" aria-labelledby="collection-title">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">EXPLORE / 01</p>
+            <h2 id="collection-title">探索知識</h2>
+          </div>
+          <span class="library-stat" id="total-stat">正在整理知識...</span>
+        </div>
+
+        <div class="tool-panel">
+          <div class="filter-caption"><span>依主題分類</span><span class="filter-note">選一個分類，快速縮小範圍</span></div>
+          <div id="categories" class="category-list" role="group" aria-label="主題分類"></div>
+
+          <div class="tools-row">
+            <label class="search-field" for="knowledge-search">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.8" cy="10.8" r="6.6"></circle><path d="m16 16 5 5"></path></svg>
+              <input id="knowledge-search" type="search" placeholder="搜尋知識、關鍵字或標籤..." autocomplete="off">
+              <span class="search-hint">搜尋</span>
+            </label>
+            <label class="sort-label" for="sort-select"><span>排序</span>
+              <select id="sort-select"><option value="recent">最新更新</option><option value="title">名稱 A–Z</option></select>
+            </label>
+          </div>
+
+          <div class="tag-row">
+            <span class="tag-label">TAGS</span>
+            <div id="tags" class="tag-list" role="group" aria-label="標籤篩選"></div>
+          </div>
+        </div>
+
+        <div class="results-head"><p id="results-label" role="status" aria-live="polite">載入知識中...</p><span class="small-rule" aria-hidden="true"></span></div>
+        <div id="notice" class="notice" hidden role="alert"></div>
+        <div id="cards" class="card-grid" aria-live="polite"></div>
+        <div id="empty-state" class="empty-state" hidden>
+          <span class="empty-mark" aria-hidden="true">⌕</span>
+          <h3>找不到符合的內容</h3>
+          <p>試試其他關鍵字，或清除目前的分類與標籤。</p>
+          <button id="reset-filters" class="outline-button" type="button">清除篩選</button>
+        </div>
+      </section>
+
+      <section id="about" class="about-panel" aria-labelledby="about-title">
+        <div><p class="section-kicker">ABOUT / 02</p><h2 id="about-title">知識不必一次整理完，<br>只要每次多留下一點。</h2></div>
+        <div class="about-copy"><p>這個網站是一個持續成長的知識庫。每篇知識都有主題、標籤與摘要，可以在首頁預覽；文字筆記可在站內閱讀，外部資源則能直接前往原網站。</p><p>專案的新增流程、檔名規範與檢查方式，都記錄在根目錄的 <code>AGENTS.md</code>，讓 AI 與人都能按照同一套規則繼續擴充。</p><a href="./AGENTS.md" target="_blank" rel="noopener noreferrer">查看專案規則 <span aria-hidden="true">↗</span></a></div>
+      </section>
+    </main>
+    <footer class="site-footer"><span>✳ 什麼都想學億點</span><span>Keep what matters. Find it again.</span><span>Made to grow, one note at a time.</span></footer>
+  </div>
+  <noscript><p class="noscript">本網站需要啟用 JavaScript 才能載入知識內容。</p></noscript>
+</body>
+</html>

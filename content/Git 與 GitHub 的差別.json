@@ -1,0 +1,37 @@
+{
+  "id": "git-and-github",
+  "title": "Git 與 GitHub 的差別",
+  "category": "程式與網頁",
+  "tags": [
+    "Git",
+    "版本控制"
+  ],
+  "summary": "Git 記錄程式變更；GitHub 用來託管儲存庫與協作。掌握兩者分工。",
+  "kind": "article",
+  "updated": "2026-11-14",
+  "reading_minutes": 3,
+  "source_url": "https://docs.github.com/en/get-started/start-your-journey/what-is-github",
+  "sections": [
+    {
+      "heading": "兩個名稱，不同工作",
+      "paragraphs": [
+        "Git 是版本控制工具，可以在自己的電腦上追蹤檔案的歷史。GitHub 是託管 Git 儲存庫的平台，提供線上備份、共享、Pull Request 等協作機制。"
+      ]
+    },
+    {
+      "heading": "最常見的流程",
+      "bullets": [
+        "修改專案檔案。",
+        "使用 git add 將變更加入暫存區。",
+        "使用 git commit 保存一個可追蹤的版本。",
+        "使用 git push 將本機提交推送到 GitHub。"
+      ]
+    },
+    {
+      "heading": "為什麼對小專案也有用",
+      "paragraphs": [
+        "當 AI 幫你修改網站時，版本紀錄能幫你知道改了什麼。若新版出現錯誤，也比較容易比較或回到先前狀態。"
+      ]
+    }
+  ]
+}

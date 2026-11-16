@@ -1,0 +1,17 @@
+{
+  "id": "unique-english-id",
+  "title": "新知識的完整主題名稱",
+  "category": "學習與整理",
+  "tags": ["知識管理", "筆記方法"],
+  "summary": "用一句到兩句話說明這則知識的核心內容，供首頁卡片顯示。",
+  "kind": "article",
+  "updated": "2026-11-16",
+  "reading_minutes": 3,
+  "sections": [
+    {
+      "heading": "第一節標題",
+      "paragraphs": ["此處填寫有意義、可實際閱讀的內容。"],
+      "bullets": ["可選擇用清單補充重點。"]
+    }
+  ]
+}
