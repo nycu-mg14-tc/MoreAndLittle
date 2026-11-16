@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eef5ef">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>內容管理｜什麼都想學億點</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/admin.css">
+  <script type="module" src="./assets/js/admin.js"></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="./index.html"><span class="brand-mark" aria-hidden="true">✳</span><span>什麼都想學億點</span></a>
+      <nav class="header-links" aria-label="管理導覽"><a href="./index.html#collection">返回知識列表</a></nav>
+    </header>
+    <main class="admin-shell">
+      <div class="admin-heading"><p class="section-kicker">YOUR LITTLE LIBRARY</p><h1>內容管理</h1><p>把剛學到的事，變成下一張知識卡片。</p></div>
+      <p id="admin-message" class="notice" role="status" aria-live="polite" hidden></p>
+
+      <section id="login-panel" class="admin-panel" aria-labelledby="login-title">
+        <h2 id="login-title">解鎖你的管理頁</h2>
+        <p class="admin-help">使用專案擁有者的 GitHub 管理金鑰，才能新增內容。金鑰只在本次頁面開啟期間使用，重新整理或離開後需要再次輸入。</p>
+        <form id="login-form">
+          <label for="repository">GitHub 專案</label>
+          <input id="repository" name="repository" required type="text" autocomplete="off" spellcheck="false" placeholder="你的帳號/knowledge-atlas" aria-describedby="repository-help">
+          <p id="repository-help" class="admin-help">已預填本站的專案；一般不需要更改。</p>
+          <label for="admin-token">管理金鑰</label>
+          <input id="admin-token" name="token" type="password" required autocomplete="off" spellcheck="false" placeholder="貼上你的 GitHub fine-grained token" aria-describedby="token-help">
+          <p id="token-help" class="admin-help">請勿填寫 GitHub 密碼，也不要把金鑰傳給他人。</p>
+          <button id="unlock" class="primary-button" type="submit">解鎖管理頁</button>
+        </form>
+        <details class="setup-help"><summary>第一次使用：如何取得管理金鑰？</summary>
+          <ol>
+            <li>先確認完整網站已上傳到自己的 GitHub 專案。</li>
+            <li>開啟 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">GitHub 金鑰設定 ↗</a>，設定名稱與到期日。</li>
+            <li>Resource owner 選自己；Repository access 選 Only select repositories，僅勾選這個網站的專案。</li>
+            <li>Repository permissions 的 <strong>Contents</strong> 選 <strong>Read and write</strong>，其餘維持預設。</li>
+            <li>產生後，將金鑰保存在自己的密碼管理工具，並貼到上面的欄位。</li>
+          </ol>
+          <p>管理頁的入口可以公開；真正的寫入權限由 GitHub 驗證。請讓這個專案只有你具有寫入權限。</p>
+        </details>
+      </section>
+
+      <section id="editor-panel" hidden>
+        <div class="admin-session"><p id="session-label"></p><button id="logout" class="outline-button" type="button">登出管理</button></div>
+        <div class="admin-grid">
+          <section class="admin-panel" aria-labelledby="editor-title">
+            <h2 id="editor-title">新增知識</h2>
+            <form id="entry-form">
+              <fieldset id="entry-fields">
+                <label for="entry-title">主題名稱 <span>必填</span></label>
+                <input id="entry-title" name="title" required maxlength="100" placeholder="例如：我學會的時間整理方法">
+                <div class="admin-two-columns">
+                  <div><label for="entry-category">分類</label><select id="entry-category" name="category" required></select></div>
+                  <div><label for="entry-kind">內容類型</label><select id="entry-kind" name="kind"><option value="article">文字筆記</option><option value="link">收藏網站</option></select></div>
+                </div>
+                <label for="entry-tags">標籤 <span>必填</span></label>
+                <input id="entry-tags" name="tags" required maxlength="200" placeholder="例如：學習方法, 筆記整理" aria-describedby="tags-help">
+                <p id="tags-help" class="admin-help">用逗號分開，可以直接填寫新標籤。</p>
+                <label for="entry-summary">卡片摘要 <span>必填</span></label>
+                <textarea id="entry-summary" name="summary" required maxlength="500" rows="3" placeholder="簡短說明這張卡片能幫助讀者學到什麼。"></textarea>
+                <div id="article-fields">
+                  <label for="entry-heading">內文小標題 <span>選填</span></label>
+                  <input id="entry-heading" name="heading" maxlength="120" placeholder="內容">
+                  <label for="entry-body">文章內容 <span>必填</span></label>
+                  <textarea id="entry-body" name="body" required maxlength="100000" rows="10" placeholder="直接輸入文字，空一行就會分成下一段。"></textarea>
+                  <label for="entry-source">參考來源網址 <span>選填</span></label>
+                  <input id="entry-source" name="sourceUrl" type="url" placeholder="https://…">
+                </div>
+                <div id="link-fields" hidden>
+                  <label for="entry-url">網站網址 <span>必填</span></label>
+                  <input id="entry-url" name="url" type="url" disabled placeholder="https://…">
+                </div>
+                <div class="admin-actions"><button id="publish" class="primary-button" type="submit">儲存並發布卡片</button><button id="new-entry" class="outline-button" type="button">清空表單</button></div>
+                <p class="admin-help">儲存後會等待網站更新，通常需幾分鐘。所有訪客都能看到發布的內容。</p>
+              </fieldset>
+            </form>
+          </section>
+          <aside class="admin-preview" aria-labelledby="preview-title"><p class="section-kicker">PREVIEW</p><h2 id="preview-title">卡片預覽</h2><div id="preview-card" class="knowledge-card"></div><div id="preview-body" class="admin-panel"></div></aside>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer"><span>✳ 什麼都想學億點</span><a href="./index.html">返回首頁</a></footer>
+  </div>
+  <noscript><p class="noscript">請啟用 JavaScript 以使用管理功能。</p></noscript>
+</body>
+</html>

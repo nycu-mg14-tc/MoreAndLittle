@@ -8,17 +8,19 @@
 
 本次作業不只是完成單一網頁，也在根目錄建立 `AGENTS.md`，規範頁面風格、檔案名稱、資料結構、新增內容步驟與驗收條件，讓 AI 以後能按照相同規則繼續擴充。
 
+本機另完成管理頁，更新上線後，擁有者可使用 GitHub 管理金鑰解鎖，在手機填表與預覽新增卡片；系統會依相同資料規格存回 GitHub。繳交前須確認本次管理頁更新已發布。
+
 ## 2. GitHub Repository 連結
 
-`[待填入實際的 GitHub Repository 網址]`
+[GitHub Repository](https://github.com/nycu-mg14-tc/MoreAndLittle)
 
 ## 3. 網頁連結
 
-`[待填入 GitHub Pages 啟用後的實際網址]`
+[什麼都想學億點](https://nycu-mg14-tc.github.io/MoreAndLittle/)
 
 ## 4. AGENTS.md
 
-`[待填入實際 Repository 中 AGENTS.md 的連結]`
+[AGENTS.md](https://github.com/nycu-mg14-tc/MoreAndLittle/blob/main/AGENTS.md)
 
 `AGENTS.md` 已包含：專案目標、頁面資訊架構、視覺規範、檔案分工、JSON 欄位、命名規則、AI 擴充流程、修改限制、檢查方式與部署流程。
 

@@ -9,7 +9,7 @@
 - 每則知識必須有：**主題名稱（title）、分類（category）、至少一個標籤（tags）、有內容的摘要（summary），以及文字內文（article）或有效網址（link）**。
 - **不得**為了讓畫面好看而放入沒有內容、不能開啟、連結未知或不存在的卡片。
 - 新增內容不能破壞舊內容、篩選功能、站內導覽或 GitHub Pages 部署。
-- 無需帳號、資料庫、付費 API 或後端伺服器；靜態檔案直接在 GitHub Pages 執行。
+- 讀者無需帳號；靜態網站不需要資料庫、付費 API 或自行維運的後端。擁有者可使用自己的 GitHub fine-grained token，在管理頁透過 GitHub API 新增內容。
 
 ## 2. 頁面資訊架構
 
@@ -37,6 +37,16 @@
 - 沒有結果：顯示友善的空狀態與「清除篩選」按鈕。
 - 載入失敗：顯示錯誤通知；可跳過部分有問題的內容，但不能以空白畫面假裝成功。
 
+### 管理頁 `admin.html`
+
+- 首頁與文章頁頁尾提供「內容管理」入口；手機可填寫標題、分類、標籤、摘要及文章或網址，並預覽。
+- 公開的登入頁不等於公開寫入權限。使用 GitHub API 驗證金鑰與專案擁有者身分；真正的寫入權限由 GitHub 控制。儲存庫須只授予擁有者寫入權限，才能維持單人管理。
+- `data/admin.json` 只存公開的 Repository 名稱，不得包含密碼或金鑰。金鑰僅保留在記憶體，送到固定的 `https://api.github.com`；不可寫入 localStorage、sessionStorage、網址、日誌或專案檔案。
+- 發布時讀取最新分支與完整目錄，檢查有效內容、重複標題、ID 和檔名；以同一個 Git commit 新增內容檔及更新目錄。
+- 更新分支必須使用 `force: false`，不得覆蓋他人的新提交；斷線或失敗保留表單，同稿重試先檢查是否已儲存，避免重複新增。
+- 寫入成功只能宣稱「已儲存到 GitHub」，不能宣稱 Pages 已部署成功。初次需要設定擁有者的管理金鑰，說明見 `ADMIN_GUIDE.md`。
+- 目前管理頁只新增，不提供修改、刪除或新增分類；維持原本的內容契約，新增標籤可直接填寫。
+
 ## 3. 視覺與 UX 規則
 
 - 風格：**簡潔、乾淨、易掃讀**；底色以淡綠（目前為 `#eef5ef`）為主，搭配白色卡片、深灰綠文字與低飽和綠色；也可在維持對比的前提下使用淡藍。
@@ -57,18 +67,26 @@ knowledge-atlas/
 ├─ VALIDATION_REPORT.md          # 測試結果與尚待驗證項目
 ├─ index.html                    # 首頁：分類、標籤、搜尋、卡片
 ├─ entry.html                    # 共用文章詳情頁
+├─ admin.html                    # 擁有者新增內容的表單
+├─ ADMIN_GUIDE.md                # 金鑰設定、使用與疑難排解
 ├─ .nojekyll                     # 讓 GitHub Pages 直接發佈靜態檔
 ├─ assets/
 │  ├─ css/style.css              # 共用版型與響應式樣式
 │  ├─ js/catalog.js              # 資料載入、欄位檢查與篩選
 │  ├─ js/main.js                 # 首頁互動
 │  ├─ js/entry.js                # 詳情頁渲染
+│  ├─ js/admin.js                # 管理表單、預覽與登入狀態
+│  ├─ js/admin-model.js          # 表單轉換、命名與重複檢查
+│  ├─ js/github-admin.js         # GitHub 驗證與原子提交
+│  ├─ css/admin.css             # 管理頁響應式樣式
 │  └─ favicon.svg                # 網站圖示
 ├─ data/catalog.json             # 唯一內容清單與分類定義
+├─ data/admin.json               # 公開的 GitHub 專案設定
 ├─ content/<主題名稱>.json         # 一篇知識對應一個 JSON 檔案
 ├─ templates/內容範本.json        # 新增文章時複製的範本
 ├─ scripts/validate_content.py   # 新增／修改後的資料檢查
 ├─ scripts/smoke_test.mjs        # JavaScript 載入、篩選與搜尋測試
+├─ scripts/admin_test.mjs        # 模擬 GitHub 驗證與安全發布測試
 └─ .github/workflows/validate.yml # GitHub 更新時自動測試
 ```
 
@@ -160,7 +178,8 @@ knowledge-atlas/
 - 不得把完整文章直接重複塞入 `index.html`，避免內容一多就難維護。
 - 使用 `textContent` 等安全的文字渲染方式；勿將未受信任的 JSON 文字直接當成 HTML 執行。
 - 外部資源使用 `target="_blank"` 時加上 `rel="noopener noreferrer"`；不要用 iframe 冒充網站預覽，因為許多網站禁止嵌入。
-- 不得加入 API 金鑰、密碼、個人敏感資料、需要付費的服務或未經授權的第三方內容。
+- 不得將 API 金鑰、密碼、個人敏感資料加入原始碼或發布檔案；管理頁允許擁有者當次輸入自己的金鑰，但不得持久化。不得加入需要付費的服務或未經授權的第三方內容。
+- 修改管理功能須執行 `node scripts/admin_test.mjs`；涵蓋拒絕未授權身分、衝突不覆蓋、斷線重試不重複、中文資料與登出。
 - 不主動新增複雜框架或後端；若確實有必要，先說明改動原因、依賴與對 GitHub Pages 的影響。
 
 ## 8. 驗收標準（每次改動都適用）

@@ -1,6 +1,19 @@
 ﻿# 作業標準與驗收紀錄（2026-11-16）
 
-專案名稱：**什麼都想學億點**。結論：本機專案符合規則文件、可持續擴充與可瀏覽網頁的要求；GitHub 上傳及公開網址尚無完成證據，不能視為整份作業已完成。
+專案名稱：**什麼都想學億點**。原有公開首頁與 GitHub 儲存庫已確認可讀取。本次新增的管理功能已在本機通過驗證，尚未上傳，不能視為管理頁已在線上啟用。
+
+## 管理頁新增驗收（2026-11-16）
+
+- 已確認 [Repository](https://github.com/nycu-mg14-tc/MoreAndLittle) 存在，擁有者為 `nycu-mg14-tc`、預設分支 `main`、已啟用 Pages；[公開首頁](https://nycu-mg14-tc.github.io/MoreAndLittle/) 回傳 HTTP 200。
+- 新增 `admin.html`、`assets/css/admin.css`、`assets/js/admin.js`、`assets/js/admin-model.js`、`assets/js/github-admin.js`、`data/admin.json`、`ADMIN_GUIDE.md` 與 `scripts/admin_test.mjs`；首頁與文章頁增加管理入口，規範及 CI 同步更新。
+- `node scripts/admin_test.mjs` 通過：表單必填欄位、中文字元、檔名限制、非法網址、拒絕非擁有者／無效金鑰、拒絕未登記內容、同一提交寫入兩檔、保留舊目錄、禁止強制更新、衝突拒絕、斷線重試不重複、登出後禁止發布。
+- Edge 實際執行管理頁，攔截 GitHub 網路請求並提供模擬回應（不使用真實金鑰、不寫入遠端）：錯誤帳號拒絕、成功解鎖、輸入欄清除金鑰、localStorage/sessionStorage 未儲存資料、文章／連結表單切換、即時預覽、發布衝突保留表單、成功提示、已儲存但回應中斷後重試不重複、登出再登入皆通過。
+- 管理頁在 1440／768／390／320 px 寬度無水平溢出；已檢視手機截圖。公開首頁仍顯示 8 筆內容，管理入口正確。
+- Critic 檢查修正瀏覽器 `fetch` 的呼叫綁定，以及儲存後再次登入時表單停用狀態；修正後重新驗證通過。
+- `python -X utf8 scripts/validate_content.py` 與 `node scripts/smoke_test.mjs` 仍通過。
+- 尚未用真實管理金鑰執行寫入／Pages 部署；讀取公開儲存庫成功，但上傳權限預檢因本機沒有 GitHub 登入而失敗。因此這次更新尚未推送，線上管理頁仍待部署。
+
+以下保留原有網站的驗收項目。
 
 ## 作業要求對照
 
@@ -14,8 +27,8 @@
 | 主題名.檔案類型 | 每筆為 `content/<title>.json`，檔名與標題一致，均已登記目錄 |
 | 預覽與跳轉 | 所有卡片可渲染，6 篇文章及返回連結已測；外部連結屬性及資源詳情頁已測 |
 | 持續新增內容 | 共用文章頁、JSON 範本與中央目錄；已修正測試寫死 8 筆資料的限制 |
-| GitHub Repository | 本資料夾尚無 Git 儲存庫，沒有可核對的實際遠端網址；待完成 |
-| 公開可瀏覽網頁 | 本機 HTTP 網頁通過驗證；GitHub Pages 公開網址仍待提供與驗證 |
+| GitHub Repository | `nycu-mg14-tc/MoreAndLittle` 已確認存在；本機資料夾仍未初始化 Git |
+| 公開可瀏覽網頁 | 原有公開首頁 HTTP 200；本次新增管理功能尚未推送 |
 
 ## 本次修改
 
@@ -61,8 +74,8 @@
 
 ## 尚待完成與驗證範圍
 
-- 尚未取得實際 Repository／GitHub Pages 網址；無法核對公開網站或 GitHub Actions 執行結果。
-- 本機子路徑驗收不代表 GitHub Pages 已部署。公開發布後，仍需以實際網址重新檢查。
+- 已取得實際 Repository／GitHub Pages 網址並確認公開首頁；尚未驗證本次更新的 GitHub Actions 或管理頁部署結果。
+- 本機子路徑驗收不代表新增管理功能已部署。更新發布後，仍需用自己的金鑰實測新增及首頁出現卡片。
 - 外站已由網頁工具讀取；瀏覽器測試檢查外部連結屬性，未實際點擊外站並驗證新分頁內容。
 - 手機測試使用瀏覽器視窗模擬，未在實體手機驗證；未進行完整輔助科技稽核。
 
