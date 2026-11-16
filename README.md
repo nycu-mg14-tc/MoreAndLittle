@@ -4,7 +4,6 @@
 
 網站採淡綠底色、白色知識卡片與小型圖示，依「站名與簡介 → 分類／標籤篩選 → 知識預覽」排列。網站顯示名稱為「什麼都想學億點」，專案資料夾與建議 Repository 名稱保留 `knowledge-atlas`。
 
-**作業狀態（2026-11-16）：** 專案規則、內容格式與本機網頁已檢查；目前資料夾尚未初始化 Git，也未提供可核對的 Repository／公開網站網址，因此 GitHub 上傳及公開部署仍待完成。詳細結果見 [VALIDATION_REPORT.md](VALIDATION_REPORT.md)。
 
 ## 已實作
 
@@ -41,33 +40,6 @@ python -m http.server 8000
 5. 執行 `python scripts/validate_content.py` 並在瀏覽器檢查卡片、篩選和跳轉。
 
 **為什麼需要編輯清單？** GitHub Pages 是靜態網站，瀏覽器不會自動列出 `content/` 資料夾所有檔案；必須透過清單告訴網站要載入哪些 JSON。
-
-## 發布至 GitHub Pages
-
-1. 登入 [GitHub](https://github.com/)，建立新的 **Public** Repository，建議命名為 `knowledge-atlas`。
-2. 將本專案所有檔案與資料夾放在 Repository 根目錄（不是把 ZIP 檔本身上傳）。
-3. 在 Repository 的 **Settings → Pages** 中，選擇 **Deploy from a branch**。
-4. 選擇 `main` 與 `/(root)`，儲存設定。GitHub 發布完成後，在 Pages 頁面會看到實際網址。
-5. 一般的網址格式會是 `https://<GitHub帳號>.github.io/knowledge-atlas/`。請以 GitHub 顯示的實際網址為準，再用手機或無痕視窗確認首頁、文章與外站連結。
-
-如用 Git 指令上傳，可在 Repository 建立後，於本專案資料夾執行（替換帳號，且 Git 已登入或有授權）：
-
-```bash
-git init
-git add .
-git commit -m "Create rule-driven knowledge library"
-git branch -M main
-git remote add origin https://github.com/<GitHub帳號>/knowledge-atlas.git
-git push -u origin main
-```
-
-網址中的 `<GitHub帳號>` 是填寫位置，**不是目前已建立的公開網站**。
-
-官方參考：[GitHub Pages 設定指南](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)。
-
-## 作業繳交
-
-請使用 `SUBMISSION_TEMPLATE.md` 填寫學校、學號、系級、姓名、Repository 網址及正式網頁網址。提交之前，記得確認 GitHub Pages 已公開、`AGENTS.md` 可在 Repository 中開啟。
 
 ## 已知限制
 
